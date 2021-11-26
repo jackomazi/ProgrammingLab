@@ -1,23 +1,19 @@
 class CSVFile():
-    def __init__(self, data, valore):
-        self.data = data
-        self.valore = valore
+    def __init__(self, nome):
+        self.nome = nome
+        
+    def get_data(self):
+        my_file = open(self.nome,"r")
+        lista = []
+        for line in my_file:
+            lista.append(line.replace("\n",""))
+        my_file.close()
+        for item in lista:
+            print("[{}]".format(item))
+       
 
-    def __str__(self):
-        return "{},{}".format(self.data,self.valore)
-            
-my_file = open("shampoo_sales.csv","r")
-lista = []
-for line in my_file:
-    elemento = line.split(',')
-    if elemento[0] != 'Date':
-        data = elemento[0]
-        valore = elemento[1].replace("\n","")
-        lista.append(CSVFile(data,valore))
-
-
-for line in lista:
-    print(line)
+lista = CSVFile('shampoo_sales.csv') 
+lista.get_data()
 
 
-my_file.close()
+
